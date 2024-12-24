@@ -10,8 +10,13 @@ def main():
 
 
 def get_book_text(path):
-  with open(path) as f:
-    return f.read()
+    try:
+        with open(path) as f:
+            return f.read()
+    except FileNotFoundError:
+        raise FileNotFoundError(f"The file at {path} was not found.")
+    except Exception as e:
+        raise Exception(f"An error occurred while reading the file: {e}")
 
 def get_num_words(text):
    words = text.split()
